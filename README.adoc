@@ -1,0 +1,15 @@
+Litetunes
+=========
+Ciaran Downey <code@ciarand.me>
+
+[quote]
+A non-functioning headless music player
+
+Dependencies
+------------
+- libsox
+- OS X (_for now_)
+
+License
+-------
+http://choosealicense.com/licenses/isc/[ISC], see the LICENSE file.
