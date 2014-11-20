@@ -17,7 +17,7 @@ func NewMemoryQueue() *MemoryQueue {
 
 // Queue adds a new track to the queue
 func (m *MemoryQueue) Queue(t *Track) error {
-	if curlen := len(m.tracks); cap(m.tracks) == curlen {
+	if curlen := m.Count(); cap(m.tracks) == curlen {
 		bigger := make([]*Track, curlen, 2*curlen+1)
 		copy(bigger, m.tracks)
 		m.tracks = bigger
