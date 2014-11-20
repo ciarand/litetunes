@@ -32,12 +32,12 @@ func TestMemoryQueueCount(t *testing.T) {
 		dq, err := q.Dequeue()
 
 		if err != nil {
-			t.Error("Unexpected error:", err)
+			t.Errorf("Unexpected error: %s", err)
 			return
 		}
 
 		if !reflect.DeepEqual(dq, track) {
-			t.Errorf("#%d Dequeue should return the same pointer passed in (expected %#v, got %#v)", i, track, dq)
+			t.Errorf("Dequeue should return the same pointer passed in (expected %#v, got %#v)", track, dq)
 			return
 		}
 

@@ -8,27 +8,22 @@ import (
 // MemoryQueue is an in-memory implementation of the Queue interface
 type MemoryQueue struct {
 	tracks []*Track
-	count  int
 }
 
 // NewMemoryQueue constructs a new MemoryQueue to use
 func NewMemoryQueue() *MemoryQueue {
-	return &MemoryQueue{count: 0, tracks: []*Track{}}
+	return &MemoryQueue{tracks: []*Track{}}
 }
 
 // Queue adds a new track to the queue
 func (m *MemoryQueue) Queue(t *Track) error {
-	curlen := len(m.tracks)
-
-	if m.Count() == curlen {
+	if curlen := len(m.tracks); cap(m.tracks) == curlen {
 		bigger := make([]*Track, curlen, 2*curlen+1)
 		copy(bigger, m.tracks)
 		m.tracks = bigger
 	}
 
 	m.tracks = append(m.tracks, t)
-
-	m.count++
 
 	return nil
 }
@@ -48,8 +43,6 @@ func (m *MemoryQueue) Dequeue() (*Track, error) {
 		}
 	}
 
-	m.count--
-
 	m.tracks = m.tracks[1:]
 
 	return t, nil
@@ -57,5 +50,5 @@ func (m *MemoryQueue) Dequeue() (*Track, error) {
 
 // Count returns the number of tracks in the queue
 func (m *MemoryQueue) Count() int {
-	return m.count
+	return len(m.tracks)
 }
